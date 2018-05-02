@@ -10,7 +10,7 @@ import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
-import Tabs, { Tab } from 'material-ui/Tabs'
+import { Tab } from 'material-ui/Tabs'
 import { Divider, Button } from 'material-ui'
 
 class App extends Component {
@@ -28,15 +28,6 @@ class App extends Component {
       ]
     }
   }
-
-  // fetchNewsByCategory() {
-  //   axios.get(`https://newsapi.org/v2/top-headlines?country=id&category=business&apiKey=5eb211a68ad044a98036cedae105d12a`)
-  //     .then(response => {
-  //       let result = response.data.articles
-  //       this.setState({ data: result })
-  //     })
-  //     .catch(err => console.log(err))
-  // }
 
   render() {
     return (
@@ -58,16 +49,15 @@ class App extends Component {
               </div>
             </Toolbar>
             <Divider />
-            <Tabs>
-              <Tab label="All News" />
+            <div>
               {
                 this.state.categories.map(category => 
-                  <Link to={`/${category}`}>
-                    <Tab label={category} key={category} />
+                  <Link to={`/${category}`} key={`cat-${category}`}>
+                    <Tab label={category} />
                   </Link>
                 )
               }
-            </Tabs>
+            </div>
           </AppBar>
 
           <Grid container className="content" justify="center">
