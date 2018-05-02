@@ -13,3 +13,20 @@
 .page-title {
   margin: 25px 0;
 }
+
+.news {
+  padding: 5px 10px;
+}
+
+.img {
+  width: 450px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.link:hover {
+  color: #eaeaea
+}

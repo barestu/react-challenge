@@ -52,7 +52,7 @@ class App extends Component {
             <div>
               {
                 this.state.categories.map(category => 
-                  <Link to={`/${category}`} key={`cat-${category}`}>
+                  <Link className="link"  to={`/${category}`} key={`cat-${category}`}>
                     <Tab label={category} />
                   </Link>
                 )
