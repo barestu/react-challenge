@@ -1,0 +1,15 @@
+.brand {
+  flex: 1;
+}
+
+.nav {
+  padding: 5px;
+}
+
+.content {
+  padding: 10px 20px;
+}
+
+.page-title {
+  margin: 25px 0;
+}

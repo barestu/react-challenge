@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+
+import Home from './views/Home'
+import About from './views/About'
+import NewsByCategory from './components/NewsByCategory.jsx'
+
+import './style.css'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Grid from 'material-ui/Grid'
-import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Tabs, { Tab } from 'material-ui/Tabs'
-
-import NewsList from './components/NewsList'
-import { Divider } from 'material-ui';
+import { Divider, Button } from 'material-ui'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      data: [],
       categories: [
         'business',
         'entertainment',
@@ -27,54 +29,58 @@ class App extends Component {
     }
   }
 
-  fetchNews() {
-    axios.get('https://newsapi.org/v2/top-headlines?country=id&category=technology&apiKey=5eb211a68ad044a98036cedae105d12a')
-      .then(response => {
-        let result = response.data.articles
-        this.setState({ data: result })
-      })
-      .catch(err => console.log(err))
-  }
-
-  componentDidMount() {
-    this.fetchNews()
-    this.interval = setInterval(() => this.fetchNews(), 60 * 1000)
-  }
+  // fetchNewsByCategory() {
+  //   axios.get(`https://newsapi.org/v2/top-headlines?country=id&category=business&apiKey=5eb211a68ad044a98036cedae105d12a`)
+  //     .then(response => {
+  //       let result = response.data.articles
+  //       this.setState({ data: result })
+  //     })
+  //     .catch(err => console.log(err))
+  // }
 
   render() {
-    let style = {
-      contentMargin: {
-        margin: 0,
-        padding: 10
-      }
-    }
-
     return (
-      <div className="App">
-        <AppBar color="secondary" position="static">
-          <Toolbar>
-            <Typography variant="headline" color="inherit">
-              Beritaku
-            </Typography>
-          </Toolbar>
-          <Divider />
-          <Tabs>
-            {
-              this.state.categories.map(category => 
-                <Tab label={category} />
-              )
-            }
-          </Tabs>
-        </AppBar>
+      <Router>
+        <div className="App">
+          <AppBar color="secondary" position="static">
+            <Toolbar>
+              <Typography className="brand" variant="headline" color="inherit">
+                BeritaKu
+              </Typography>
+              <Link to="/" className="nav">
+                <Button variant="raised" color="inherit">Home</Button>
+              </Link>
+              <Link to="/about" className="nav">
+                <Button variant="raised" color="inherit">About</Button>
+              </Link>
+              <div className="nav">
+                <Button variant="raised" color="primary">Login</Button>
+              </div>
+            </Toolbar>
+            <Divider />
+            <Tabs>
+              <Tab label="All News" />
+              {
+                this.state.categories.map(category => 
+                  <Link to={`/${category}`}>
+                    <Tab label={category} key={category} />
+                  </Link>
+                )
+              }
+            </Tabs>
+          </AppBar>
 
-        <Grid container justify="center" style={style.contentMargin}>
-          <Grid item xs={9}>
-            <Paper style={style.contentMargin}>
-              <NewsList data={this.state.data} />
-            </Paper>
+          <Grid container className="content" justify="center">
+            <Grid item xs={9}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/about" component={About} />
+                <Route path="/:category" component={NewsByCategory} />
+              </Switch>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </div>
+      </Router>
     )
   }
 }
