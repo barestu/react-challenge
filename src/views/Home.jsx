@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import store from '../store'
 import axios from 'axios'
 import NewsList from '../components/NewsList'
 import Typography from 'material-ui/Typography'
@@ -9,15 +10,25 @@ class Home extends Component {
   constructor() {
     super()
     this.state = {
-      allNews: []
+      allNews: store.getState()
     }
+
+    store.subscribe(() => {
+      const getAllNews = store.getState()
+      this.setState({
+        allNews: getAllNews
+      })
+    })
   }
 
   fetchAllNews() {
     axios.get(`https://newsapi.org/v2/top-headlines?country=id&apiKey=5eb211a68ad044a98036cedae105d12a`)
       .then(response => {
         let result = response.data.articles
-        this.setState({ allNews: result })
+        store.dispatch({
+          type: 'FETCH_ALL_NEWS',
+          payload: result
+        })
       })
       .catch(err => console.log(err))
   }
