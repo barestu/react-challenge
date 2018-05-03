@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { allNews } from '../store/news/actions'
 import axios from 'axios'
 import NewsList from '../components/NewsList'
 import Typography from 'material-ui/Typography'
 import Paper from 'material-ui/Paper'
-import '../style.css'
 
 class Home extends Component {
   fetchAllNews() {
@@ -37,12 +38,9 @@ const mapStateToProps = (state) => ({
   newsList: state
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  allNews: (allNews) => dispatch({
-    type: 'FETCH_ALL_NEWS',
-    payload: allNews
-  })
-})
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  allNews
+}, dispatch)
 
 export default connect(
   mapStateToProps,

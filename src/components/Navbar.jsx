@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
-import '../style.css'
-
 import Typography from 'material-ui/Typography'
 import { Tab } from 'material-ui/Tabs'
 import { Divider, Button } from 'material-ui'

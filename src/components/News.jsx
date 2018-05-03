@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
 import { Button } from 'material-ui'
-import '../style.css'
 
 class News extends Component {
   

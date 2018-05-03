@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import News from './News'
-import '../style.css'
 
 class NewsList extends Component {
   render() {

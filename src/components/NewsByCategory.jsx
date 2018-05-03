@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { newsByCategory } from '../store/news/actions'
 import axios from 'axios'
 import NewsList from './NewsList'
 import Paper from 'material-ui/Paper'
@@ -27,10 +29,6 @@ class NewsByCategory extends Component {
     )
   }
 
-  componentWillUnmount() {
-    this.unsubscribe()
-  }
-
   render() {
     return (
       <div>
@@ -47,12 +45,9 @@ const mapStateToProps = (state) => ({
   newsList: state
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  newsByCategory: (newsByCategory) => dispatch({
-    type: 'FETCH_NEWS_BY_CATEGORY',
-    payload: newsByCategory
-  })
-})
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  newsByCategory
+}, dispatch)
 
 export default connect(
   mapStateToProps,
