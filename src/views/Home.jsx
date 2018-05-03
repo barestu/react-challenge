@@ -13,7 +13,7 @@ class Home extends Component {
       allNews: store.getState()
     }
 
-    store.subscribe(() => {
+    this.unsubscribe = store.subscribe(() => {
       const getAllNews = store.getState()
       this.setState({
         allNews: getAllNews
@@ -36,6 +36,10 @@ class Home extends Component {
   componentDidMount() {
     this.fetchAllNews()
     this.interval = setInterval(() => this.fetchAllNews(), 60 * 1000)
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   render() {

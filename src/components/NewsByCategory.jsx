@@ -11,7 +11,7 @@ class NewsByCategory extends Component {
       news: store.getState()
     }
 
-    store.subscribe(() => {
+    this.unsubscribe = store.subscribe(() => {
       const getNewsByCategory = store.getState()
       this.setState({
         news: getNewsByCategory
@@ -42,6 +42,10 @@ class NewsByCategory extends Component {
     this.interval = setInterval(() => 
       this.fetchNewsByCategory(), 60 * 1000
     )
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe()
   }
 
   render() {

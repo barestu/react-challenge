@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Paper } from 'material-ui';
-import { Typography } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
 
 class Error404 extends Component {
   render() {
