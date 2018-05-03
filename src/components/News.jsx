@@ -27,7 +27,7 @@ class News extends Component {
           <small>{author}</small>
         </div>
         <p>{description}</p>
-        <Button variant="raised" color="secondary" href={url}>
+        <Button variant="raised" color="secondary" href={url} target="__blank">
           Selengkapnya
         </Button>
         <Divider style={{margin: '15px'}} />

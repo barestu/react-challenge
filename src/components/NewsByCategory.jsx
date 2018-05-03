@@ -1,32 +1,15 @@
 import React, { Component } from 'react'
-import store from '../store'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import NewsList from './NewsList'
 import Paper from 'material-ui/Paper'
 
 class NewsByCategory extends Component {
-  constructor() {
-    super()
-    this.state = {
-      news: store.getState()
-    }
-
-    this.unsubscribe = store.subscribe(() => {
-      const getNewsByCategory = store.getState()
-      this.setState({
-        news: getNewsByCategory
-      })
-    })
-  }
-
   fetchNewsByCategory(category) {
     axios.get(`https://newsapi.org/v2/top-headlines?country=id&category=${category}&apiKey=5eb211a68ad044a98036cedae105d12a`)
       .then(response => {
         let result = response.data.articles
-        store.dispatch({
-          type: 'FETCH_NEWS_BY_CATEGORY',
-          payload: result
-        })
+        this.props.newsByCategory(result)
       })
       .catch(err => console.log(err))
   }
@@ -52,7 +35,7 @@ class NewsByCategory extends Component {
     return (
       <div>
         <Paper className="content" align="center">
-          <NewsList data={this.state.news}
+          <NewsList data={this.props.newsList}
           category={this.props.match.params.category} />
         </Paper>
       </div>
@@ -60,4 +43,18 @@ class NewsByCategory extends Component {
   }
 }
 
-export default NewsByCategory;
+const mapStateToProps = (state) => ({
+  newsList: state
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  newsByCategory: (newsByCategory) => dispatch({
+    type: 'FETCH_NEWS_BY_CATEGORY',
+    payload: newsByCategory
+  })
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewsByCategory);

@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
 import Home from './views/Home'
+import NewsByCategory from './components/NewsByCategory.jsx'
 import About from './views/About'
 import Error404 from './views/Error404'
-import NewsByCategory from './components/NewsByCategory.jsx'
 
 import './style.css'
 import Grid from 'material-ui/Grid'
