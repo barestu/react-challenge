@@ -52,7 +52,7 @@ class App extends Component {
             <div>
               {
                 this.state.categories.map(category => 
-                  <Link className="link"  to={`/${category}`} key={`cat-${category}`}>
+                  <Link className="link"  to={`/category/${category}`} key={`cat-${category}`}>
                     <Tab label={category} />
                   </Link>
                 )
@@ -65,7 +65,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
-                <Route path="/:category" component={NewsByCategory} />
+                <Route path="/category/:category" component={NewsByCategory} />
               </Switch>
             </Grid>
           </Grid>
