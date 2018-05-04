@@ -35,7 +35,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  newsList: state
+  newsList: state.newsReducer.news
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

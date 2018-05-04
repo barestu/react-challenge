@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import Typography from 'material-ui/Typography'
-import { Tab } from 'material-ui/Tabs'
-import { Divider, Button } from 'material-ui'
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Tab,
+  Divider,
+  Popover,
+  Button
+} from 'material-ui'
+import LoginForm from './LoginForm';
 
 class Navbar extends Component {
   constructor() {
     super()
     this.state = {
+      anchorEl: null,
       categories: [
         'business',
         'entertainment',
@@ -22,7 +28,21 @@ class Navbar extends Component {
     }
   }
 
+  handleClick = event => {
+    this.setState({
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      anchorEl: null,
+    });
+  };
+
   render() {
+    const { anchorEl } = this.state
+
     return (
       <div className="navbar">
         <AppBar color="secondary" position="static">
@@ -36,8 +56,31 @@ class Navbar extends Component {
             <Link to="/about" className="nav">
               <Button variant="raised" color="inherit">About</Button>
             </Link>
+            <Link to="/protected" className="nav">
+              <Button variant="raised" color="inherit">Protected</Button>
+            </Link>
             <div className="nav">
-              <Button variant="raised" color="primary">Login</Button>
+              <Button
+                onClick={this.handleClick}
+                variant="raised"
+                color="primary"
+              >Login</Button>
+              <Popover
+                className="login"
+                open={Boolean(anchorEl)}
+                anchorEl={anchorEl}
+                onClose={this.handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+              >
+                <LoginForm />
+              </Popover>
             </div>
           </Toolbar>
           <Divider />

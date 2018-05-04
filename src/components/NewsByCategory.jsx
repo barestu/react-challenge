@@ -42,7 +42,7 @@ class NewsByCategory extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  newsList: state
+  newsList: state.news
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

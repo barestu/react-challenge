@@ -5,7 +5,9 @@ import {
 
 export const allNews = (allNews) => ({
   type: FETCH_ALL_NEWS,
-  payload: allNews
+  payload: {
+    allNews
+  }
 })
 
 export const newsByCategory = (newsByCategory) => ({

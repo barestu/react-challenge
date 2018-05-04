@@ -1,21 +1,15 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
+import newsReducer from './news/reducers'
 
-let allNews = []
+const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
-const reducer = (state = allNews, action) => {
-  switch (action.type) {
-    case 'FETCH_ALL_NEWS':
-      return action.payload
-    case 'FETCH_NEWS_BY_CATEGORY':
-      return action.payload
-    default:
-      return state
-  }
-}
+const reducers = combineReducers({
+  newsReducer
+})
 
 const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  reducers,
+  reduxDevtools
 )
 
 export default store
